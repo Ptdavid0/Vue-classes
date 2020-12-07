@@ -1,0 +1,52 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--------------------------------------------->
+
+<div id="app">
+  <!-- Array -->
+  <ul>
+    <li v-once v-for="(cor,i) in cores">{{i+1}}) {{cor}}</li>
+  </ul>
+  <hr />
+
+  <template v-once v-for="(cor,i) in cores">
+    <h1>Temos o {{cor}}, no index:{{i}}</h1>
+  </template>
+
+  <!-- Object -->
+  <ul>
+    <li v-for="ph in pessoas">
+      <div v-for="(valor,key,index) in ph">
+        {{key.toUpperCase()}} = {{valor}} ({{index}})
+      </div>
+    </li>
+  </ul>
+  <hr />
+
+  <!-- Possibilities -->
+  <span v-for="n in 10"> {{n}} </span>
+
+  <hr />
+
+  <ul>
+    <li v-for="(cor,i) in cores">{{i+1}}) {{cor}}</li>
+  </ul>
+  <button @click="cores.push('Branco')" :key="cor">ADD</button>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      cores: ["vermelho", "amarelo", "azul", "verde"],
+      pessoas: [
+        { nome: "Ana", idade: 29, peso: 59, alto: true },
+        { nome: "Gui", idade: 20, peso: 90, alto: false }
+      ]
+    },
+    methods: {},
+    computed: {},
+    watch: {}
+  });
+</script>

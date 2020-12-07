@@ -1,0 +1,64 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<style>
+  .caixas {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .demo {
+    height: 100px;
+    width: 100px;
+    background-color: aqua;
+  }
+
+  .c1 {
+    background-color: brown;
+  }
+
+  .c2 {
+    background-color: chartreuse;
+  }
+</style>
+
+<div id="app">
+  <div class="caixas">
+    <div
+      class="demo"
+      @click="aplicarC1 = !aplicarC1"
+      :class="{c1:aplicarC1}"
+    ></div>
+
+    <!-- No class="{c1:aplicarC1} , o c1 sera a key que sera adicionanda, ja o aplicarC1 tera o valor de false/true , fazendo assim que seja ou nao aplicada na classe geral-->
+
+    <div class="demo" @click="aplicarC2 = !aplicarC2" :class="estilo2"></div>
+
+    <!-- Atraves do Input, esta sendo passado qual sera a classe adicional. Sempre que quiser mudar a;go com input em tempo real, use o v-model. -->
+
+    <div class="demo" :class="classesCSS"></div>
+  </div>
+
+  <hr />
+  <input type="text" v-model="classesCSS" />
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      aplicarC1: false,
+      aplicarC2: false,
+      classesCSS: "c1"
+    },
+    // Para nao ficar muito grande dentro de :class,utilizamos uma funcao dentro de computed.
+    computed: {
+      estilo2() {
+        return {
+          c2: this.aplicarC2,
+          c1: !this.aplicarC2
+        };
+      }
+    },
+    methods: {}
+  });
+</script>

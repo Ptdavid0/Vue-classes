@@ -1,0 +1,55 @@
+router.js
+
+import Vue from "vue";
+import Router from "vue-router";
+import Inicio from "./components/Inicio";
+import Usuario from "./components/usuario/Usuario";
+
+Vue.use(Router);
+
+export default new Router({
+  routes: [
+    {
+      path: "/",
+      component: Inicio
+    },
+    {
+      path: "/usuario",
+      component: Usuario
+    }
+  ]
+});
+
+-----------------------------------------------
+
+main.js
+
+import "./style.css";
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";  <--ADD
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,                       <--ADD
+  render: h => h(App)
+}).$mount("#app");
+
+----------------------------------------------
+
+App.vue
+
+<template>
+  <div id="app">
+    <h1>Rotas com VueRouter</h1>
+    <router-view></router-view>  <--ADD
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>

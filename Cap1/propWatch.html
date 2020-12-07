@@ -1,0 +1,44 @@
+<!-- Aqui estamos aprendendo sobre as propriedades computadas, no qual o Vue adiciona certa inteligencia a chamada, fazendo com que ela seja utilizada,somente quando chamada quando o valor chave sofre alteracao. No caso abaixo, o data "contador" , sera o analisado pelo Computed. As funcoes do computed nao utilizam () , ao serem chamadas.-->
+
+<!-- Neste aprendemos a utilizar o watch , que monitora um determinado ponto da pagina, como nesse caso o "contador". o Nome da funcao interna deve ser o mesmo do que esta sendo monitorado.-->
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="aumentar">Aumentar</button>
+  <button v-on:click="contador2++">Aumentar 2</button>
+  <button v-on:click="diminuir">Diminuir</button>
+  <p>{{contador}}|{{contador2}}</p>
+  <p>{{resultado}}</p>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      contador: 0,
+      contador2: 0
+    },
+    watch: {
+      contador(novo, antigo) {
+        setTimeout(() => {
+          this.contador = 0;
+        }, 2000);
+      }
+    },
+    computed: {
+      resultado() {
+        console.log("Chamado");
+        return this.contador > 10 ? "Maior que 10" : "Menor que 10";
+      }
+    },
+    methods: {
+      aumentar() {
+        this.contador++;
+      },
+      diminuir() {
+        this.contador--;
+      }
+    }
+  });
+</script>

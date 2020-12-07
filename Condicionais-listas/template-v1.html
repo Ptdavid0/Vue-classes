@@ -1,0 +1,53 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--------------------------------------------->
+
+<div id="app">
+  <!-- template sera exibida apenas quando o usuario estiver logado. Alem disso , utilizando essa tag, nao sera adicionada outra camada , como o caso da div.Nao interfirindo no desing do site. -->
+
+  <!-- V-IF -->
+
+  <template v-if="logado">
+    <p>Usuario Logado: {{nome}}</p>
+    <p>Perfil:Admin</p>
+  </template>
+
+  <p v-else-if="anonimo">Usuario esta Anonimo</p>
+  <p v-else>Nenhum Usuario Logado</p>
+  <button @click="logado = !logado">{{logado ? "Sair" : "Entrar" }}</button>
+  <input type="checkbox" v-model="anonimo" />
+
+  <!-- V-SHOW -->
+
+  <hr />
+  <footer v-show="logado">
+    Desenvolvido Para Tu
+  </footer>
+  <footer v-show="!logado">
+    Desenvolvido Para Tu Desconectado
+  </footer>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      nome: "Pedro",
+      logado: false,
+      anonimo: true
+    },
+    methods: {},
+    computed: {},
+    watch: {}
+  });
+</script>
+
+<!-- 
+    v-if=''
+    v-else-if
+    v-else
+    Devem ser usados sequencialmente(caso precise de um else)
+
+    v-show
+ -->

@@ -1,0 +1,79 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <p v-once>{{titulo}}</p>
+  <p>{{saudacao()}}</p>
+
+  <!-- Link with Bind -->
+
+  <a v-bind:href="link">Google</a>
+
+  <!-- ADD on Click e Interpolacao -->
+
+  <button v-on:click="somarNoParams">Add 1</button>
+  <button v-on:click="somarParams(5)">Add 5</button>
+  <p>Vezes Clicadas {{contador}}</p>
+  <p>{{contador > 10 ? 'Maior que 10' : 'Menor que 10'}}</p>
+
+  <!-- mouseMove or mousemove \ Both works -->
+  <p v-on:mousemove="position">
+    Posicao do Mouse : X:{{poxitionX}} e Y:{{positionY}}
+    <span v-on:mousemove.stop="">STOP HERE</span>
+  </p>
+  <hr />
+
+  <!-- Teclado -->
+  <input type="text" v-on:keyup.enter="exibirAlerta" />
+
+  <hr />
+
+  <!-- Double Bind (Not Working)-->
+  <p>{{titulo}}</p>
+  <input type="text" v-model="titulo" />
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      titulo: "DOM Manipulation",
+      link: "http://google.com.br",
+      contador: 0,
+      positionY: 0,
+      poxitionX: 0
+    },
+    methods: {
+      saudacao() {
+        this.titulo = "hello";
+        return this.titulo;
+      },
+      somarNoParams() {
+        this.contador++;
+      },
+      somarParams(numb) {
+        this.contador += numb;
+      },
+
+      // using events
+      position(e) {
+        this.poxitionX = e.clientX;
+        this.positionY = e.clientY;
+      },
+
+      exibirAlerta() {
+        alert("Estou teclando");
+      }
+    }
+  });
+</script>
+
+<!-- 
+  v-bind:propriedade
+  v-once
+  v-on
+  v-model
+ -->
+
+<!-- 
+   Para pegar o event , mesmo com outro parametro existente , utilize $event EX: (number , $event)
+  -->

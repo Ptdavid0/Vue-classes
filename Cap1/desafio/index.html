@@ -1,0 +1,16 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="desafio">
+  <p>{{name}}</p>
+  <p>{{multiAge()}} {{age*3}}</p>
+  <p>{{randomN()}}</p>
+
+  <div>
+    <img v-bind:src="link" height="400" />
+  </div>
+  <div>
+    <input v-bind:value="name" type="text" />
+  </div>
+</div>
+
+<script src="app.js"></script>

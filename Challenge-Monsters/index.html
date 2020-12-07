@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .basic {
+      border: 1px solid black;
+      display: flex;
+      justify-content: space-around;
+    }
+    .life {
+      text-align: center;
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>Monsters</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- ----------------------LIFE----------------------- -->
+
+      <div class="basic">
+        <div class="life">
+          <h1>Jogador</h1>
+          <p>{{playerLife}}%</p>
+        </div>
+
+        <div class="life">
+          <h1>Monstro</h1>
+          <p>{{monsterLife}}%</p>
+        </div>
+      </div>
+
+      <!-- --------------------BUTTONS----------------------- -->
+
+      <div class="basic">
+        <template v-if="showing == 1">
+          <button @click="showing = 2">Start</button>
+        </template>
+
+        <template v-else-if="showing = 2">
+          <button @click="attack">Ataque</button>
+          <button @click="specialAttack">Ataque Especial</button>
+          <button @click="heal">Curar</button>
+          <button @click="giveUp">Desistir</button>
+        </template>
+
+        <template v-else>
+          <h2>{{resultado()}}</h2>
+        </template>
+      </div>
+
+      <!-- --------------------ATTACKS----------------------- -->
+
+      <div class="basic"></div>
+    </div>
+  </body>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        monsterLife: 100,
+        playerLife: 100,
+        showing: 1
+      },
+      methods: {
+        attack() {
+          this.playerLife -= Math.floor(Math.random() * 15);
+          this.monsterLife -= Math.floor(Math.random() * 10);
+          if (this.playerLife <= 0 || this.monsterLife <= 0) {
+            console.log("got it ");
+            this.showing = 3;
+          }
+        },
+        specialAttack() {
+          this.playerLife -= Math.floor(Math.random() * 13);
+          this.monsterLife -= Math.floor(Math.random() * 15);
+        },
+        heal() {
+          this.playerLife += Math.floor(Math.random() * 12);
+          this.playerLife -= Math.floor(Math.random() * 10);
+        },
+        giveUp() {
+          this.playerLife = 100;
+          this.monsterLife = 100;
+          this.showing = 1;
+        },
+        resultado() {
+          console.log("Called");
+          if (this.playerLife <= 0 && this.monsterLife > 0) {
+            console.log("lost");
+            return "Voce Perdeu";
+          }
+          if (this.playerLife > 0 && this.monsterLife <= 0) {
+            console.log("win");
+            return "Voce Ganhou ";
+          }
+        }
+      },
+      computed: {},
+      watch: {
+        playerLife() {
+          console.log("here");
+        }
+      }
+    });
+  </script>
+</html>
